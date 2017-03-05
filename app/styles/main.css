@@ -1,0 +1,442 @@
+body {
+  background-color: black;
+  color: white;
+}
+
+@font-face {
+  font-family: '007_goldeneyeregular';
+  src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/57826/007_goldeneye-webfont.eot');
+  src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/57826/007_goldeneye-webfont.eot?#iefix') format('embedded-opentype'), url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/57826/007_goldeneye-webfont.woff2') format('woff2'), url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/57826/007_goldeneye-webfont.woff') format('woff'), url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/57826/007_goldeneye-webfont.ttf') format('truetype'), url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/57826/007_goldeneye-webfont.svg#007_goldeneyeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face{
+  font-family: 'bond';
+  src: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/57826/007.otf") format("opentype");
+}
+
+.watch {
+  background: url('http://i.imgur.com/87uECYy.png') no-repeat center center;
+  background-repeat: no-repeat;
+  position: relative;
+  width: 800px;
+  height: 600px;
+  margin: 0 auto;
+  background-size: 800px 700px;
+  font-family: 'bond';
+  -webkit-transform: scale(1.1, 1);
+  -moz-transform: scale(1.1, 1);
+  -ms-transform: scale(1.1, 1);
+  -o-transform: scale(1.1, 1);
+  transform: scale(1.1, 1);
+  background-color: black;
+  zoom: 75%;
+  /*webkit*/
+}
+
+.levelSelection{
+  background-color: orangered;
+  background-image: url(../images/black-felt.png);
+  padding: 15px;
+}
+
+.active {
+  color: rgb(5, 143, 4);
+}
+
+.title {
+  font-size: 18px;
+  padding-top: 166px;
+  text-align: center;
+  -webkit-transform: scale(1.5, 1);
+  -moz-transform: scale(1.5, 1);
+  -ms-transform: scale(1.5, 1);
+  -o-transform: scale(1.5, 1);
+  transform: scale(1.5, 1);
+}
+
+.subtitle {
+  font-size: 15px;
+  padding-top: 11px;
+  text-align: center;
+  -webkit-transform: scale(1.525, 1);
+  -moz-transform: scale(1.525, 1);
+  -ms-transform: scale(1.525, 1);
+  -o-transform: scale(1.525, 1);
+  transform: scale(1.525, 1);
+}
+
+.weapon {
+  width: 80px;
+  text-align: center;
+  font-size: 17px;
+  -webkit-transform: scale(1.37, 1);
+  -moz-transform: scale(1.3, 1);
+  -ms-transform: scale(1.3, 1);
+  -o-transform: scale(1.3, 1);
+  transform: scale(1.3, 1);
+  margin-top: 40px;
+  margin-left: 240px;
+  min-height: 40px;
+  vertical-align: bottom;
+  margin-bottom: 148px;
+  bottom: 0;
+  position: absolute;
+}
+
+.ammo {
+  margin-left: 525px;
+  text-align: right;
+  margin-bottom: 148px;
+  bottom: 0;
+  position: absolute;
+  font-size: 17px;
+  -webkit-transform: scale(1.37, 1);
+  -moz-transform: scale(1.3, 1);
+  -ms-transform: scale(1.3, 1);
+  -o-transform: scale(1.3, 1);
+  transform: scale(1.3, 1);
+}
+
+.activebox {
+  background-color: rgb(5, 143, 4);
+  width: 59px;
+  height: 13px;
+  float: left;
+  margin-bottom: 128px;
+  bottom: 0;
+  position: absolute;
+  margin-left: 227px;
+}
+
+#status {
+  display: inline-block;
+  min-width: 50px;
+}
+
+#weaponImg {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  height: 50px;
+  padding-top: 20px;
+  -webkit-animation: rotate 2s linear infinite;
+  -moz-animation: rotate 2s linear infinite;
+  animation: rotate 2s linear infinite;
+  border: 0;
+  zoom: 200%;
+}
+
+.topDawg{
+  padding-top: 140px !important;
+  height: 80px;
+}
+
+.extraTopper{
+  height: 220px !important;
+}
+
+@-webkit-keyframes rotate {
+  100% {
+    -webkit-transform: rotatey(360deg);
+  }
+}
+
+@-moz-keyframes rotate {
+  100% {
+    -moz-transform: rotatey(360deg);
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotatey(360deg);
+  }
+}
+
+.notransition {
+  -webkit-animation: none !important;
+  -moz-animation: none !important;
+  -o-animation: none !important;
+  -ms-animation: none !important;
+  animation: none !important;
+}
+#weaponImg:not(.notransition){
+  opacity: .5;
+}
+.bullet {
+  margin-bottom: -15px;
+}
+#gameTitle{
+  font-family: "007_goldeneyeregular";
+  font-size: 50px;
+  text-align: center;
+  color: gold;
+  max-width: 100%;
+  padding-right: 10px;
+}
+#gameSubtitle{
+  font-family: "007_goldeneyeregular";
+  color: silver;
+  font-size: 75px;
+  text-align: center;
+  margin: -35px -255px 0 0;
+  max-width: 100%;
+  display: inline-block;
+}
+
+.gameEdition{
+  display: block;
+}
+
+.edition{
+  font-family: bond;
+  color: silver;
+  text-align: center;
+  max-width: 100%;
+  margin-top: -60px;
+}
+a{
+  color: inherit;
+  text-decoration: none;
+}
+.abort span{
+  margin: 0 18px;
+}
+.focus {
+    outline: 0;
+  text-shadow: 0px 0px 1px #fff;
+}
+*:focus{
+  outline: 0;
+  text-shadow: 0px 0px 1px #fff;
+}
+.weaponMenu{
+  margin-left: 185px;
+  margin-top: -20px;
+  list-style: none;
+  color: rgb(5, 143, 4);
+}
+.weaponMenu .focus{
+  background: rgb(5, 143, 4);
+  color: white;
+  display: inline;
+}
+.controls{
+  text-align: right;
+  margin: -200px auto;
+}
+.controls td{
+    padding: 25px;
+    font-size: 35px;
+}
+.leftMouse:before{
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/57826/1439252628_mouse_select_left.png') no-repeat 0 0;
+  content: "";
+  float: left;
+  width: 32px;
+  height: 32px;
+  margin: 0 5px 0 0;
+}
+.rightMouse:before{
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/57826/1439252653_mouse_select_right.png') no-repeat 0 0;
+  content: "";
+  float: left;
+  width: 32px;
+  height: 32px;
+  margin: 0 5px 0 0;
+}
+.reload:before{
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/57826/1439253716_key_R.png') no-repeat 0 0;
+  content: "";
+  float: left;
+  width: 32px;
+  height: 32px;
+  margin: 0 5px 0 0;
+  background-size: 32px;
+}
+.pause:before{
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/57826/1439253917_key_return.png') no-repeat 0 0;
+  content: "";
+  float: left;
+  width: 32px;
+  height: 32px;
+  margin: 0 5px 0 0;
+  background-size: 32px;
+}
+
+.fade.ng-enter {
+  transition:0.5s linear all;
+  opacity:0;
+}
+
+/* The finishing CSS styles for the enter animation */
+.fade.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
+
+
+.wrapper{
+    background-color: #333;
+    height: 250px;
+    width: 1266px;
+    top: 50px;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.box{
+    width: 250px;
+    height: 100%;
+    display: inline-block;
+    margin: auto;
+    overflow: hidden;
+
+}
+.boxes{
+    width: 100%;
+    height: 40px;
+}
+.small_box{
+    margin: 0;
+    background-color: #fff;
+    display: inline-block;
+    width: 26px;
+    height: 20px;
+    margin: 10px 10px 10px 10.81px;
+}
+.center_box{
+    width: 90%;
+    height: 170px;
+    background: no-repeat;
+     -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    margin: auto;
+    cursor: pointer;
+    transition: opacity 0.2s linear;
+    transition: transform 0.3s linear;
+    animation: load 0.5s linear;
+    font-family: 'bond';
+    opacity: 0.65;
+    position: relative;
+}
+
+.box-subtitle{
+  bottom: 0;
+  position: absolute;
+  margin-left: 5px;
+}
+
+.center_box:hover{
+    //transform: scale(0.95);
+    opacity: 1.0;
+}
+
+@keyframes load{
+    from{transform: scale(0);}
+}
+
+.dam{
+  background: url('../images/dam-levelSelect.jpg');
+  background-size: cover;
+}
+
+.facility{
+  background: url('../images/facility-levelSelect.jpg');
+  background-size: cover;
+}
+
+.runway{
+  background: url('../images/runway-levelSelect.png');
+  background-size: cover;
+}
+
+.surface{
+  background: url('../images/surface-levelSelect.jpg');
+  background-size: cover;
+}
+
+.bunker{
+  background: url('../images/bunker-levelSelect.jpg');
+  background-size: cover;
+}
+
+.silo{
+  background: url('../images/silo-levelSelect.png');
+  background-size: cover;
+}
+
+.frigate{
+  background: url('../images/frigate-levelSelect.jpg');
+  background-size: cover;
+}
+
+.surface2{
+  background: url('../images/surface2-levelSelect.png');
+  background-size: cover;
+}
+
+.bunker2{
+  background: url('../images/bunker2-levelSelect.jpg');
+  background-size: cover;
+}
+
+.statue{
+  background: url('../images/statue-levelSelect.jpg');
+  background-size: cover;
+}
+
+.archives{
+  background: url('../images/archives-levelSelect.jpg');
+  background-size: cover;
+}
+
+.streets{
+  background: url('../images/streets-levelSelect.jpg');
+  background-size: cover;
+}
+
+.depot{
+  background: url('../images/depot-levelSelect.jpg');
+  background-size: cover;
+}
+
+.train{
+  background: url('../images/train-levelSelect.png');
+  background-size: cover;
+}
+
+.jungle{
+  background: url('../images/jungle-levelSelect.jpg');
+  background-size: cover;
+}
+
+.control{
+  background: url('../images/control-levelSelect.jpg');
+  background-size: cover;
+}
+
+.caverns{
+  background: url('../images/caverns-levelSelect.jpg');
+  background-size: cover;
+}
+
+.cradle{
+  background: url('../images/cradle-levelSelect.jpg');
+  background-size: cover;
+}
+
+.aztec{
+  background: url('../images/aztec-levelSelect.jpg');
+  background-size: cover;
+}
+
+.egyptian{
+  background: url('../images/egyptian-levelSelect.jpg');
+  background-size: cover;
+}
