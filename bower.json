@@ -5,11 +5,15 @@
     "angular": "^1.4.0",
     "angular-animate": "^1.4.0",
     "angular-route": "^1.4.0",
-    "angular-touch": "^1.4.0",
-    "jQuery": "^3.1.1"
+    "angular-touch": "^1.4.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
+  },
+  "overrides": {
+    "jquery": {
+      "main": "bower_components/jQuery/dist/jquery.js"
+    }
   },
   "appPath": "app",
   "moduleName": "007SurvivalApp"
