@@ -1,6 +1,7 @@
 <div id="baus">
   <p id="gameTitle">Golden&#43;EYE</p>
   <div class="edition"><span class="gameEdition">Survival Edition</span> <span id="gameSubtitle">007&#42;</span></div>
+  <div class="pause-text" ng-if="inGame && map !== null">Press ESC to Pause</div>
 </div>
 <span ng-repeat="chunks in chunkedLevels" ng-if="inGame && map === null">
   <div ng-if="$index%5 || $index === 0" class="levelSelection">
@@ -26,6 +27,9 @@
     </div>
   </div>
 </span>
+<audio class="levelMusic" autoplay loop ng-if="inGame && map === null">
+  <source src="sounds/mission-select.mp3" type="audio/mpeg">
+</audio>
 <div class="watch fade" ng-if="!inGame" ng-init="playAudio()">
   <div class="active title" ng-if="menu === 0">G WATCH V2.01 BETA</div>
   <div class="active subtitle" ng-if="menu === 0">MISSION STATUS: <span id="status">INCOMPLETE</span></div>
@@ -62,7 +66,7 @@
   </div>
   <div class="activebox"></div>
   <audio class="beep">
-    <source src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/57826/scroll.mp3" type="audio/mpeg">
+    <source src="../sounds/scroll.mp3" type="audio/mpeg">
   </audio>
   <div id="sound"></div>
 </div>

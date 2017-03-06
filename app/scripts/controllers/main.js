@@ -17,6 +17,7 @@ angular.module('007SurvivalApp')
       right = 39,
        down = 40,
        enter = 13,
+       esc = 27,
         //lclick = 1,
         //rclick = 3,
         key;
@@ -155,6 +156,13 @@ angular.module('007SurvivalApp')
           playSound();
           angular.element('.abort').focus();
         }
+        else if(key === esc){
+          $scope.inGame = !$scope.inGame;
+          if($scope.inGame){
+            $scope.audio.pause();
+            $scope.audio.currentTime = 0;
+          }
+        }
         if ($scope.menu === 0) {
           angular.element('.activebox').css('margin-left', '227px');
         }
@@ -172,7 +180,7 @@ angular.module('007SurvivalApp')
         $scope.inGame = false;
       }*/
       $scope.playAudio = function() {
-          $scope.audio = new Audio('http://pedrumgolriz.com/sounds/pause.mp3');
+          $scope.audio = new Audio('../sounds/pause.mp3');
           $scope.audio.play();
           $scope.audio.addEventListener('ended', function() {
               this.currentTime = 0;
@@ -180,7 +188,7 @@ angular.module('007SurvivalApp')
           }, false);
       };
       $scope.go = function(map){
-        $scope.inGame = false;
+        $scope.inGame = true;
         for(var i in ORIGINAL_LEVELS){
           if(map === ORIGINAL_LEVELS[i]){
             $scope.map = i;

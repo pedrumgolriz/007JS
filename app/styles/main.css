@@ -3,6 +3,12 @@ body {
   color: white;
 }
 
+.pause-text{
+  margin-top: -20px;
+  font-family: 'bond';
+  text-align: center;
+}
+
 @font-face {
   font-family: '007_goldeneyeregular';
   src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/57826/007_goldeneye-webfont.eot');
