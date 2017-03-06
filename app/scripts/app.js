@@ -19,7 +19,24 @@ angular
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
-        controllerAs: 'main'
+        controllerAs: 'main',
+        resolve:{
+          resolvedWeapons: ['$http', function($http){
+            return $http.get('../data/weapons.json').then(function(res){
+             return res.data;
+            });
+          }],
+          resolvedMaps: ['$http', function($http){
+            return $http.get('../data/maps.json').then(function(res){
+             return res.data;
+            });
+          }],
+          resolvedAmmo: ['$http', function($http){
+            return $http.get('../data/ammo.json').then(function(res){
+             return res.data;
+            });
+          }]
+        }
       })
       .when('/about', {
         templateUrl: 'views/about.html',

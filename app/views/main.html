@@ -15,7 +15,7 @@
           <span class="small_box"></span>
           <span class="small_box"></span>
         </div>
-        <div role="button" ng-click="go(level)" class="center_box {{level}}"><span class="box-subtitle">{{level.toUpperCase()}}</span></div>
+        <div role="button" ng-click="go(level)" class="center_box {{level.name}}"><span class="box-subtitle">{{level.name.toUpperCase()}}</span></div>
         <div class="boxes">
           <span class="small_box"></span>
           <span class="small_box"></span>
@@ -30,7 +30,7 @@
 <audio class="levelMusic" autoplay loop ng-if="inGame && map === null">
   <source src="sounds/mission-select.mp3" type="audio/mpeg">
 </audio>
-<div class="watch fade" ng-if="!inGame" ng-init="playAudio()">
+<div class="watch fade" ng-if="!inGame" ng-init="playAudio()" ng-class="watchFuzz ? 'watchFuzz' : ''">
   <div class="active title" ng-if="menu === 0">G WATCH V2.01 BETA</div>
   <div class="active subtitle" ng-if="menu === 0">MISSION STATUS: <span id="status">INCOMPLETE</span></div>
   <div class="abort active subtitle" ng-keydown="abort($event)" ng-if="menu === 0"><span class="abortText">Abort Mission</span> </div>

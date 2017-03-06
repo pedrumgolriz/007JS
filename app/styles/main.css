@@ -35,9 +35,34 @@ body {
   -ms-transform: scale(1.1, 1);
   -o-transform: scale(1.1, 1);
   transform: scale(1.1, 1);
+  margin-top: 50px;
   background-color: black;
   zoom: 75%;
   /*webkit*/
+}
+
+.watchFuzz::before{
+  content: '';
+    position: absolute;
+    top:0;
+    left:0;
+    bottom: 0;
+    right:0;
+    background-image: linear-gradient(
+      rgba(0,0,0,.5) 0px,
+      rgba(0,0,0,0) 2px,
+      rgba(0,0,0,.7) 3px
+    );
+    background-size: 100% 4px;
+    animation: .43s interference infinite ease-in-out alternate;
+    transform-origin:0 0%;
+}
+
+@keyframes interference {
+  to {
+    transform-origin:0 100%;
+    transform: scale(1.15)
+  }
 }
 
 .levelSelection{

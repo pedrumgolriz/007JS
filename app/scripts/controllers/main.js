@@ -8,10 +8,14 @@
  * Controller of the 007SurvivalApp
  */
 angular.module('007SurvivalApp')
-  .controller('MainCtrl', function ($scope, $timeout, $rootScope) {
+  .controller('MainCtrl', function ($scope, $timeout, $rootScope, $interval, $http, resolvedWeapons, resolvedMaps, resolvedAmmo) {
+    $scope.weapons = resolvedWeapons;
+    $scope.ORIGINAL_LEVELS = angular.copy(resolvedMaps);
+    $scope.ammo = resolvedAmmo;
     $scope.inGame = true; //setting true to simulate already in game
     $scope.map = null; //null is level select
     $scope.menu = 0;
+    $scope.watchFuzz = false;
     var left = 37,
         up = 38,
       right = 39,
@@ -22,7 +26,7 @@ angular.module('007SurvivalApp')
         //rclick = 3,
         key;
       $scope.$watch('inGame', function(){
-        if(!$scope.inGame){
+        if(!$scope.inGame && $scope.map !== null){
           setInterval(function() {
             $timeout(function() {
                 angular.element('#status').fadeOut('slow');
@@ -31,69 +35,35 @@ angular.module('007SurvivalApp')
                 angular.element('#status').fadeIn('slow');
               }, 1500);
           }, 1000);
-          angular.element('.beep').prop('volume', 0.1);
+          $scope.fuzzInterval = $interval(function() {
+            $timeout(function(){
+              $scope.watchFuzz = !$scope.watchFuzz;
+              var fuzzNoise = new Audio('../sounds/watchFuzz.wav');
+              fuzzNoise.play();
+            }, 15000);
+          }, 8000);
+
+          angular.element('.beep').prop('volume', 0.05);
           angular.element('.abort').css({
             opacity: 0.5
           });
         }
       });
+      $scope.$watch('map', function(){
+        if($scope.map === null){
+          $interval.cancel($scope.fuzzInterval);
+        }
+      });
       $scope.currentWeapon = 0;
-      var ORIGINAL_LEVELS = ['dam', 'facility', 'runway', 'surface', 'bunker', 'silo', 'frigate', 'surface2', 'bunker2', 'statue', 'archives', 'streets', 'depot', 'train', 'jungle', 'control', 'caverns', 'cradle', 'aztec', 'egyptian'];
-      $scope.levels = ['dam', 'facility', 'runway', 'surface', 'bunker', 'silo', 'frigate', 'surface2', 'bunker2', 'statue', 'archives', 'streets', 'depot', 'train', 'jungle', 'control', 'caverns', 'cradle', 'aztec', 'egyptian'];
+       /*
+       ['dam', 'facility', 'runway', 'surface', 'bunker', 'silo', 'frigate', 'surface2', 'bunker2', 'statue', 'archives', 'streets', 'depot', 'train', 'jungle', 'control', 'caverns', 'cradle', 'aztec', 'egyptian'];*/
+      $scope.levels = $scope.ORIGINAL_LEVELS;
       $scope.chunkedLevels = [];
       var size = 5;
       while ($scope.levels.length > 0){
           $scope.chunkedLevels.push($scope.levels.splice(0, size));
         }
 
-      $scope.weapons = [{
-        'name': 'PP7 (silenced)',
-        'ammoType': '9mm',
-        'ammo': '&#8734;',
-        'loaded': '7',
-        'image': 'http://i.imgur.com/Q0eAPwd.gif'
-      }, {
-        'name': 'Klobb',
-        'ammoType': '9mm',
-        'ammo': '16',
-        'loaded': '9',
-        'image': 'http://i.imgur.com/JCi23op.gif'
-      }, {
-        'name': 'Sniper Rifle',
-        'ammoType': 'rifle',
-        'ammo': '8',
-        'loaded': '4',
-        'image': 'http://i.imgur.com/xjQW3o6.gif'
-      }, {
-        'name': 'Cougar Magnum',
-        'ammoType': 'magnum',
-        'ammo': '6',
-        'loaded': '3',
-        'image': 'http://i.imgur.com/VcuVVo7.gif'
-      }, {
-        'name': 'Throwing Knife',
-        'ammoType': 'tknife',
-        'loaded': '2',
-        'ammo': '',
-        'image': 'http://i.imgur.com/hwsMZj7.gif'
-      }];
-      $scope.ammo = {
-        '9mm': {
-          'image': 'http://i.imgur.com/9vKZbX5.gif?1'
-        },
-        'rifle': {
-          'image': 'http://i.imgur.com/Z4bVnf7.gif?1'
-        },
-        'magnum': {
-          'image': 'http://i.imgur.com/f9GnwXP.gif'
-        },
-        'unarmed': {
-          'image': 'http://i.imgur.com/aZXVoWv.png'
-        },
-        'tknife': {
-          'image': 'http://i.imgur.com/aZXVoWv.png'
-        }
-      };
       $rootScope.$on('keypress', function (e, a) {
           a.preventDefault();
           $scope.$apply(function () {
@@ -156,11 +126,15 @@ angular.module('007SurvivalApp')
           playSound();
           angular.element('.abort').focus();
         }
-        else if(key === esc){
+        else if(key === esc && $scope.map !== null){
           $scope.inGame = !$scope.inGame;
           if($scope.inGame){
             $scope.audio.pause();
             $scope.audio.currentTime = 0;
+            $scope.mapMusic.play();
+          }
+          else{
+            $scope.mapMusic.pause();
           }
         }
         if ($scope.menu === 0) {
@@ -189,11 +163,20 @@ angular.module('007SurvivalApp')
       };
       $scope.go = function(map){
         $scope.inGame = true;
-        for(var i in ORIGINAL_LEVELS){
-          if(map === ORIGINAL_LEVELS[i]){
-            $scope.map = i;
+        for(var i in $scope.$resolve.resolvedMaps){
+          if(map.name === $scope.$resolve.resolvedMaps[i].name){
+            $scope.map = map;
           }
         }
+        //parallax background of goldeneye maps
+        //start audio
+        $scope.mapMusic = new Audio(map.music);
+        $scope.mapMusic.play().then(function(){
+          $scope.mapMusic.addEventListener('ended', function() {
+              this.currentTime = 0;
+              this.play();
+          }, false);
+        });
         console.log(map);
       };
       $scope.abort = function(e){
