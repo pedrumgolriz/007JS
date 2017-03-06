@@ -26,18 +26,23 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/map/:', {
+        templateUrl: 'views/map.html',
+        controller: 'MapCtrl',
+        controllerAs: 'map'
+      })
       .otherwise({
         redirectTo: '/'
       });
   })
-  .filter("trust", ['$sce', function($sce) {
+  .filter('trust', ['$sce', function($sce) {
     return function(htmlCode){
       return $sce.trustAsHtml(htmlCode);
     };
   }])
   .directive('onEnter', function () {
       return function (scope, element, attrs) {
-          element.bind("keydown keypress", function (event) {
+          element.bind('keydown keypress', function (event) {
               if(event.which === 13) {
                   scope.$apply(function (){
                       scope.$eval(attrs.myEnter);

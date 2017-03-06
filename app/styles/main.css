@@ -37,7 +37,8 @@ body {
 .levelSelection{
   background-color: orangered;
   background-image: url(../images/black-felt.png);
-  padding: 15px;
+  padding: 5px;
+  cursor: url("../images/crosshair.png"), auto;
 }
 
 .active {
@@ -317,11 +318,13 @@ a{
       -o-background-size: cover;
       background-size: cover;
     margin: auto;
-    cursor: pointer;
+    cursor: url("../images/crosshair.png"), auto;
     transition: opacity 0.2s linear;
     transition: transform 0.3s linear;
+    filter: grayscale(100%);
     animation: load 0.5s linear;
     font-family: 'bond';
+    transition: all 1s linear;
     opacity: 0.65;
     position: relative;
 }
@@ -334,6 +337,7 @@ a{
 
 .center_box:hover{
     //transform: scale(0.95);
+    filter: grayscale(0%);
     opacity: 1.0;
 }
 
@@ -439,4 +443,8 @@ a{
 .egyptian{
   background: url('../images/egyptian-levelSelect.jpg');
   background-size: cover;
+}
+
+.selectLevel{
+  text-align: center;
 }

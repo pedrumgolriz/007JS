@@ -37,6 +37,13 @@ angular.module('007SurvivalApp')
         }
       });
       $scope.currentWeapon = 0;
+      $scope.levels = ['dam', 'facility', 'runway', 'surface', 'bunker', 'silo', 'frigate', 'surface2', 'bunker2', 'statue', 'archives', 'streets', 'depot', 'train', 'jungle', 'control', 'caverns', 'cradle', 'aztec', 'egyptian'];
+      $scope.chunkedLevels = [];
+      var size = 5;
+      while ($scope.levels.length > 0){
+          $scope.chunkedLevels.push($scope.levels.splice(0, size));
+        }
+
       $scope.weapons = [{
         'name': 'PP7 (silenced)',
         'ammoType': '9mm',
@@ -85,7 +92,7 @@ angular.module('007SurvivalApp')
           'image': 'http://i.imgur.com/aZXVoWv.png'
         }
       };
-      $rootScope.$on('keypress', function (e, a, key) {
+      $rootScope.$on('keypress', function (e, a) {
           a.preventDefault();
           $scope.$apply(function () {
               $scope.touched(a);
@@ -164,19 +171,23 @@ angular.module('007SurvivalApp')
         $scope.inGame = false;
       }*/
       $scope.playAudio = function() {
-        var audio = new Audio('http://pedrumgolriz.com/sounds/pause.mp3');
-        audio.play();
-        audio.addEventListener('ended', function() {
-            this.currentTime = 0;
-            this.play();
-        }, false);
+          $scope.audio = new Audio('http://pedrumgolriz.com/sounds/pause.mp3');
+          $scope.audio.play();
+          $scope.audio.addEventListener('ended', function() {
+              this.currentTime = 0;
+              this.play();
+          }, false);
       };
       $scope.go = function(map){
-        $scope.inGame = false;
+        $scope.inGame = true;
         console.log(map);
       };
-      $scope.abort = function(){
-        $scope.inGame = true;
-        $scope.map = null;
-      }
+      $scope.abort = function(e){
+        if(e.keyCode === 13){
+          $scope.inGame = true;
+          $scope.map = null;
+          $scope.audio.pause();
+          $scope.audio.currentTime = 0;
+        }
+      };
   });
