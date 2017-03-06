@@ -37,6 +37,7 @@ angular.module('007SurvivalApp')
         }
       });
       $scope.currentWeapon = 0;
+      var ORIGINAL_LEVELS = ['dam', 'facility', 'runway', 'surface', 'bunker', 'silo', 'frigate', 'surface2', 'bunker2', 'statue', 'archives', 'streets', 'depot', 'train', 'jungle', 'control', 'caverns', 'cradle', 'aztec', 'egyptian'];
       $scope.levels = ['dam', 'facility', 'runway', 'surface', 'bunker', 'silo', 'frigate', 'surface2', 'bunker2', 'statue', 'archives', 'streets', 'depot', 'train', 'jungle', 'control', 'caverns', 'cradle', 'aztec', 'egyptian'];
       $scope.chunkedLevels = [];
       var size = 5;
@@ -179,7 +180,12 @@ angular.module('007SurvivalApp')
           }, false);
       };
       $scope.go = function(map){
-        $scope.inGame = true;
+        $scope.inGame = false;
+        for(var i in ORIGINAL_LEVELS){
+          if(map === ORIGINAL_LEVELS[i]){
+            $scope.map = i;
+          }
+        }
         console.log(map);
       };
       $scope.abort = function(e){
